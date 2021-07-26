@@ -189,7 +189,7 @@ button {
   align-items: center;
 }
 
-#HelpWindowContainer {
+/* #HelpWindowContainer {
   position: fixed;
   top: 0;
   left: 0;
@@ -198,9 +198,9 @@ button {
   overflow: auto;
   z-index: 2;
   background: rgba(128, 128, 128, 0.7);
-}
+} */
 
-#HelpWindow {
+/* #HelpWindow {
   position: absolute;
   top: 15%;
   left: 22%;
@@ -211,15 +211,15 @@ button {
   flex-direction: column;
   padding: 2vw;
   padding-bottom: 0;
-}
+} */
 
-.helpWindowElement {
+/* .helpWindowElement {
   background-color: var(--main-black);
 }
 
 .helpWindowElement * {
   background-color: var(--main-black);
-}
+} */
 
 .closeButton {
   position: absolute;

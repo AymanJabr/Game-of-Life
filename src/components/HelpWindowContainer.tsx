@@ -1,9 +1,38 @@
-// import styled from "styled-components";
+import styled from "styled-components";
 
 const HelpWindowContainer = () => {
+
+  const HelpWindowContainerStyle = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80vh;
+    overflow: auto;
+    z-index: 2;
+    background: rgba(128, 128, 128, 0.7);
+  `;
+
+  const HelpWindowStyle = styled.div`
+    position: absolute;
+    top: 15%;
+    left: 22%;
+    width: 55vw;
+    background: var(--main-black);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 2vw;
+    padding-bottom: 0;
+    & * {
+      background-color: var(--main-black);
+    }
+  `;
+
+
   return (
-    <div id="HelpWindowContainer" className="ninja">
-      <div id="HelpWindow">
+    <HelpWindowContainerStyle id="HelpWindowContainer" className="">
+      <HelpWindowStyle id="HelpWindow">
         <img
           className="closeButton"
           src="./images/close-button.png"
@@ -38,8 +67,8 @@ const HelpWindowContainer = () => {
             </li>
           </ol>
         </p>
-      </div>
-    </div>
+      </HelpWindowStyle>
+    </HelpWindowContainerStyle>
   );
 };
 
