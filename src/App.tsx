@@ -1,51 +1,51 @@
-import React from 'react';
+import React from "react";
+import "./index.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+      <div id="GamePanel">
+        Game Panel
+        <button id="addButtonIcon">+</button>
+        <button id="helpButtonIcon">?</button>
+      </div>
+
+      <div id="NewGameWindow" className="ninja"></div>
+      <div id="HelpWindowContainer">
+        <div id="HelpWindow">
+          <img
+            className="closeButton"
+            src="./images/close-button.png"
+            alt="close button"
+          ></img>
+
+          <div className="helpWindowElement">
+            Create new game <input type="text" name="width" id="width" />{" "}
+            <input type="text" name="height" id="height" />
+          </div>
+          <h1>OR</h1>
+          <div className="helpWindowElement">
+            <button id="UploadFile">Upload File</button>
+
+            <p> File must be '.csv', it must contain one object in the format { `{[0, 1 , 1, 0],...,[1,1,1,1]}` }</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="GameControls">
+        <div className="control" id="SpeedControl">
+          <h2>Speed</h2>
+          <input type="range" min="0.25" max="4" step="0.25" />
+        </div>
+        <div className="control">
+          <button className="controlButtons" id="StartStopButton">
+            Start
+          </button>
+          <button className="controlButtons" id="PauseButton">
+            Pause
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
