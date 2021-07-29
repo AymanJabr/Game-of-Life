@@ -177,7 +177,7 @@ button {
   align-items: center;
 }
 
-#CellsWindowContainer {
+/* #CellsWindowContainer {
   height: 100%;
 }
 
@@ -187,7 +187,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
 /* #HelpWindowContainer {
   position: fixed;
@@ -250,11 +250,11 @@ button {
   display: none;
 }
 
-.cellRow {
+/* .cellRow {
   display: flex;
-}
+} */
 
-.cell {
+/* .cell {
   height: 3vw;
   width: 3vw;
   background-color: var(--main-black);
@@ -262,11 +262,11 @@ button {
   margin: 1vw;
   border-radius: 5px;
   cursor: pointer;
-}
+} */
 
 .checked {
-  background-color: var(--main-white);
-  border-color:  var(--main-red);
+  background-color: var(--main-white) !important;
+  border: 3px solid var(--main-red) !important;
 }
 
 

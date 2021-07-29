@@ -31,7 +31,7 @@ const HelpWindowContainer = () => {
 
 
   return (
-    <HelpWindowContainerStyle id="HelpWindowContainer" className="">
+    <HelpWindowContainerStyle id="HelpWindowContainer" className="ninja">
       <HelpWindowStyle id="HelpWindow">
         <img
           className="closeButton"
