@@ -38,8 +38,8 @@ const HelpWindowContainer = () => {
           src="./images/close-button.png"
           alt="close button"
         ></img>
-        <h1 className="helpWindowElement">Game of Life Rules</h1>
-        <p className="helpWindowElement">
+        <h1>Game of Life Rules</h1>
+        <p>
           The Game of Life is a two-dimensional grid of square cells, each of
           which is in one of two possible states, live or dead. Every cell
           interacts with its eight neighbors, which are the cells that are
