@@ -18,7 +18,7 @@ export const actionUpdateStatus = (status) => ({
   status,
 });
 
-export const actionUpdateSpeed = (generationNumber) => ({
+export const actionUpdateGenerationNumber = (generationNumber) => ({
   type: UPDATE_GENERATION_NUMBER,
   generationNumber,
 });
