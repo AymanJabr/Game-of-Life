@@ -2,14 +2,29 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import rootReducer from "./reducers";
+import statisticsReducer from "./reducers/index";
 
-const initialState = {};
+const initialState = {
+  cells: [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  ],
+  speed: 1,
+  status: 0,
+  generationNumber: 0,
+};
 
 const middleware = [thunk];
 
 const store = createStore(
-  rootReducer,
+  statisticsReducer,
   initialState,
   composeWithDevTools(applyMiddleware(...middleware))
 );

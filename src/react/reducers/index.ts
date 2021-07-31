@@ -1,10 +1,25 @@
-import { UPDATE_CELLS, UPDATE_SPEED, UPDATE_STATUS, UPDATE_GENERATION_NUMBER } from '../actions/index';
+import {
+  UPDATE_CELLS,
+  UPDATE_SPEED,
+  UPDATE_STATUS,
+  UPDATE_GENERATION_NUMBER,
+} from "../actions/index";
 
 const initialState = {
-  cells: {},
+  cells: [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  ],
   speed: 1,
   status: 0,
-  generationNumber: 0
+  generationNumber: 0,
 };
 
 export default function statisticsReducer(state = initialState, action) {
