@@ -1,3 +1,12 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  UPDATE_CELLS,
+  UPDATE_SPEED,
+  UPDATE_STATUS,
+  UPDATE_GENERATION_NUMBER,
+} from "../react/actions";
+
 import styled from "styled-components";
 
 const GameControlsStyle = styled.div`
@@ -41,22 +50,22 @@ const SpeedControlStyle = styled.div`
 `;
 
 const GameControls = () => {
-    return (
-      <GameControlsStyle id="GameControls">
-        <SpeedControlStyle className="control" id="SpeedControl">
-          <h2 id="SpeedControlText">Speed: 2</h2>
-          <input type="range" min="0.25" max="4" step="0.25" />
-        </SpeedControlStyle>
-        <ControlStyle className="control">
-          <ControlButtonStyle className="controlButtons" id="StartStopButton">
-            Start
-          </ControlButtonStyle>
-          <ControlButtonStyle className="controlButtons" id="PauseButton">
-            Pause
-          </ControlButtonStyle>
-        </ControlStyle>
-      </GameControlsStyle>
-    );
-}
+  return (
+    <GameControlsStyle id="GameControls">
+      <SpeedControlStyle className="control" id="SpeedControl">
+        <h2 id="SpeedControlText">Speed: 2</h2>
+        <input type="range" min="0.25" max="4" step="0.25" />
+      </SpeedControlStyle>
+      <ControlStyle className="control">
+        <ControlButtonStyle className="controlButtons" id="StartStopButton">
+          Start
+        </ControlButtonStyle>
+        <ControlButtonStyle className="controlButtons" id="PauseButton">
+          Pause
+        </ControlButtonStyle>
+      </ControlStyle>
+    </GameControlsStyle>
+  );
+};
 
-export default GameControls 
+export default GameControls;

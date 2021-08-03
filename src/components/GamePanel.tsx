@@ -1,10 +1,14 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  actionShowHideAdd, actionShowHideHelp
+} from "../react/actions";
+
 import styled from "styled-components";
 
 import CellsWindowContainer from "./CellsWindowContainer";
 
-
 const GamePanel = () => {
-
   const GamePanelStyle = styled.div`
     position: fixed;
     top: 0;
@@ -50,10 +54,16 @@ const GamePanel = () => {
     }
   `;
 
+  const dispatch = useDispatch()
+
+  const changeAddVisibility = () => {
+    dispatch(actionShowHideAdd)
+  }
+
   return (
     <GamePanelStyle id="GamePanel">
       <CellsWindowContainer />
-      <AddButtonStyle id="addButtonIcon">+</AddButtonStyle>
+      <AddButtonStyle onClick={changeAddVisibility} id="addButtonIcon">+</AddButtonStyle>
       <HelpButtonStyle id="helpButtonIcon">?</HelpButtonStyle>
     </GamePanelStyle>
   );

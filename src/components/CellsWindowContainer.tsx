@@ -1,5 +1,8 @@
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { UPDATE_CELLS, UPDATE_SPEED, UPDATE_STATUS, UPDATE_GENERATION_NUMBER } from "../react/actions";
+
 import styled from "styled-components";
-import "../index.css";
 
 const CellsWindowContainer = () => {
   const CellsWindowContainerStyle = styled.div`

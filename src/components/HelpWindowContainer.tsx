@@ -1,7 +1,15 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  UPDATE_CELLS,
+  UPDATE_SPEED,
+  UPDATE_STATUS,
+  UPDATE_GENERATION_NUMBER,
+} from "../react/actions";
+
 import styled from "styled-components";
 
 const HelpWindowContainer = () => {
-
   const HelpWindowContainerStyle = styled.div`
     position: fixed;
     top: 0;
@@ -28,7 +36,6 @@ const HelpWindowContainer = () => {
       background-color: var(--main-black);
     }
   `;
-
 
   return (
     <HelpWindowContainerStyle id="HelpWindowContainer" className="ninja">

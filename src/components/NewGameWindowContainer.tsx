@@ -1,7 +1,15 @@
+import { useEffect, useState } from "react";
+import { connect, DefaultRootState, useDispatch, useSelector,  } from "react-redux";
+import {
+  UPDATE_CELLS,
+  UPDATE_SPEED,
+  UPDATE_STATUS,
+  UPDATE_GENERATION_NUMBER,
+} from "../react/actions";
+
 import styled from "styled-components";
 
 const NewGameWindowContainer = () => {
-
   const NewGameWindowContainerStyle = styled.div`
     position: fixed;
     top: 0;
@@ -37,8 +45,8 @@ const NewGameWindowContainer = () => {
   `;
 
   const InputContainerStyle = styled.div`
-   display: flex;
-  `
+    display: flex;
+  `;
 
   const NewGameInputContainerStyle = styled.div`
     display: flex;
@@ -58,19 +66,19 @@ const NewGameWindowContainer = () => {
     }
   `;
 
+   const isShown = useSelector((state: DefaultRootState) => state.showAdd);
 
-    const UploadFileStyle = styled.button`
-      border: 2px solid var(--main-light-gray);
-      width: 100%;
-      font-size: 1.5rem;
-      &:hover {
-        background-color: var(--main-light-gray-transparent);
-      }
-    `;
-
+  const UploadFileStyle = styled.button`
+    border: 2px solid var(--main-light-gray);
+    width: 100%;
+    font-size: 1.5rem;
+    &:hover {
+      background-color: var(--main-light-gray-transparent);
+    }
+  `;
 
   return (
-    <NewGameWindowContainerStyle id="NewGameWindowContainer" className="ninja">
+    <NewGameWindowContainerStyle id="NewGameWindowContainer" className={`${}`}>
       <NewGameWindowStyle id="NewGameWindow">
         <img
           className="closeButton"
@@ -110,4 +118,7 @@ const NewGameWindowContainer = () => {
   );
 };
 
-export default NewGameWindowContainer;
+const mapStateToProps = (state) => ({ showAdd: state.showAdd });
+
+export default connect(mapStateToProps)(NewGameWindowContainer);
+
