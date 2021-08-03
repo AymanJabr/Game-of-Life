@@ -37,6 +37,6 @@ export const cellsSlice = createSlice({
 export const { actionUpdateCells} = cellsSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectCount = (state: RootState) => state.cells.cells
+export const getCells = (state: RootState) => state.cells.cells
 
 export default cellsSlice.reducer

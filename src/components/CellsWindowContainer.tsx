@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { UPDATE_CELLS, UPDATE_SPEED, UPDATE_STATUS, UPDATE_GENERATION_NUMBER } from "../react/actions";
+import React, { useState, useEffect } from "react";
+import { useAppSelector, useAppDispatch } from "../react/hooks";
+
+import { actionUpdateCells, getCells } from "../react/slices/cellsSlice";
 
 import styled from "styled-components";
 
@@ -31,44 +32,29 @@ const CellsWindowContainer = () => {
     cursor: pointer;
   `;
 
+  // const gameCells = useAppSelector((state) => state.cells.cells);
+  const gameCells = useAppSelector((state) => getCells(state));
+  const dispatch = useAppDispatch();
+
+  // useEffect(() => {
+    
+  // }, [gameCells]);
+
   return (
     <CellsWindowContainerStyle id="CellsWindowContainer">
       <CellsWindowStyle id="CellsWindow">
-        <CellRowStyle className="cellRow">
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell checked"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-        </CellRowStyle>
-        <CellRowStyle className="cellRow">
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-        </CellRowStyle>
-        <CellRowStyle className="cellRow">
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-        </CellRowStyle>
-        <CellRowStyle className="cellRow">
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-        </CellRowStyle>
-        <CellRowStyle className="cellRow">
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-        </CellRowStyle>
+        {gameCells.map((row) => (
+          <CellRowStyle className="cellRow">
+            {row.map((cell) =>
+              cell == 1 ? (
+                <CellStyle className="cell checked"></CellStyle>
+              ) : (
+                <CellStyle className="cell"></CellStyle>
+              )
+            )}
+          </CellRowStyle>
+        ))}
+
       </CellsWindowStyle>
     </CellsWindowContainerStyle>
   );

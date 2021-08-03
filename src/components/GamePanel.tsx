@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  actionShowHideAdd, actionShowHideHelp
-} from "../react/actions";
+
 
 import styled from "styled-components";
 
@@ -57,7 +55,8 @@ const GamePanel = () => {
   const dispatch = useDispatch()
 
   const changeAddVisibility = () => {
-    dispatch(actionShowHideAdd)
+    // dispatch(actionShowHideAdd)
+    // console.log('this works')
   }
 
   return (

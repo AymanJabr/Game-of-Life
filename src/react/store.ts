@@ -3,7 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import cellsReducer from './slices/cellsSlice'
 import statsReducer from './slices/statsSlice'
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     cells: cellsReducer,
     stats: statsReducer

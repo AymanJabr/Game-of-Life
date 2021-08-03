@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 import { connect, DefaultRootState, useDispatch, useSelector,  } from "react-redux";
-import {
-  UPDATE_CELLS,
-  UPDATE_SPEED,
-  UPDATE_STATUS,
-  UPDATE_GENERATION_NUMBER,
-} from "../react/actions";
+
 
 import styled from "styled-components";
 
@@ -66,7 +61,7 @@ const NewGameWindowContainer = () => {
     }
   `;
 
-   const isShown = useSelector((state: DefaultRootState) => state.showAdd);
+  //  const isShown = useSelector((state: DefaultRootState) => state.showAdd);
 
   const UploadFileStyle = styled.button`
     border: 2px solid var(--main-light-gray);
@@ -78,7 +73,7 @@ const NewGameWindowContainer = () => {
   `;
 
   return (
-    <NewGameWindowContainerStyle id="NewGameWindowContainer" className={`${}`}>
+    <NewGameWindowContainerStyle id="NewGameWindowContainer" className='ninja'>
       <NewGameWindowStyle id="NewGameWindow">
         <img
           className="closeButton"
