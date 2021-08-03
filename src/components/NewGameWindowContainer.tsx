@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { connect, DefaultRootState, useDispatch, useSelector,  } from "react-redux";
+
+import { useAppSelector, useAppDispatch } from "../react/hooks";
+
+import {  actionUpdateShowAdd, getShowAdd } from "../react/slices/statsSlice";
 
 
 import styled from "styled-components";
@@ -61,7 +64,6 @@ const NewGameWindowContainer = () => {
     }
   `;
 
-  //  const isShown = useSelector((state: DefaultRootState) => state.showAdd);
 
   const UploadFileStyle = styled.button`
     border: 2px solid var(--main-light-gray);
@@ -72,13 +74,28 @@ const NewGameWindowContainer = () => {
     }
   `;
 
+  const dispatch = useAppDispatch()
+
+  const  showAdd = useAppSelector((state) => getShowAdd(state))
+
+  const closeWindowButton = () => {
+    dispatch(actionUpdateShowAdd());
+  };
+
+  const closeWindow = (e) => {
+    if (e.target == document.getElementById("NewGameWindowContainer")) {
+      dispatch(actionUpdateShowAdd());
+    }
+  };
+
   return (
-    <NewGameWindowContainerStyle id="NewGameWindowContainer" className='ninja'>
+    <NewGameWindowContainerStyle id="NewGameWindowContainer" className={`${showAdd ? '' : 'ninja'}`} onClick={closeWindow}>
       <NewGameWindowStyle id="NewGameWindow">
         <img
           className="closeButton"
           src="./images/close-button.png"
           alt="close button"
+          onClick={closeWindowButton}
         ></img>
 
         <NewGameWindowElementStyle>
@@ -113,7 +130,6 @@ const NewGameWindowContainer = () => {
   );
 };
 
-const mapStateToProps = (state) => ({ showAdd: state.showAdd });
 
-export default connect(mapStateToProps)(NewGameWindowContainer);
+export default NewGameWindowContainer;
 

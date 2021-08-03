@@ -32,7 +32,6 @@ const CellsWindowContainer = () => {
     cursor: pointer;
   `;
 
-  // const gameCells = useAppSelector((state) => state.cells.cells);
   const gameCells = useAppSelector((state) => getCells(state));
   const dispatch = useAppDispatch();
 

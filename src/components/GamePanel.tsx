@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { useAppSelector, useAppDispatch } from "../react/hooks";
+
+import { actionUpdateShowHelp, actionUpdateShowAdd, getShowHelp, getShowAdd } from "../react/slices/statsSlice";
 
 import styled from "styled-components";
 
@@ -52,18 +55,25 @@ const GamePanel = () => {
     }
   `;
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
-  const changeAddVisibility = () => {
-    // dispatch(actionShowHideAdd)
-    // console.log('this works')
+  const changeShowHelpVisibility = () => {
+    dispatch(actionUpdateShowHelp())
+  }
+
+  const changeShowAddVisibility = () => {
+    dispatch(actionUpdateShowAdd())
   }
 
   return (
     <GamePanelStyle id="GamePanel">
       <CellsWindowContainer />
-      <AddButtonStyle onClick={changeAddVisibility} id="addButtonIcon">+</AddButtonStyle>
-      <HelpButtonStyle id="helpButtonIcon">?</HelpButtonStyle>
+      <AddButtonStyle onClick={changeShowAddVisibility} id="addButtonIcon">
+        +
+      </AddButtonStyle>
+      <HelpButtonStyle onClick={changeShowHelpVisibility} id="helpButtonIcon">
+        ?
+      </HelpButtonStyle>
     </GamePanelStyle>
   );
 };

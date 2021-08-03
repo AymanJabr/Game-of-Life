@@ -32,11 +32,11 @@ export const statsSlice = createSlice({
     actionUpdateGenerationNumber: (state, action: PayloadAction<number>) => {
       state.generationNumber = action.payload;
     },
-    actionUpdateShowAdd: (state, action: PayloadAction<boolean>) => {
-      state.showAdd = action.payload;
+    actionUpdateShowAdd: (state) => {
+      state.showAdd = !state.showAdd;
     },
-    actionUpdateShowHelp: (state, action: PayloadAction<boolean>) => {
-      state.showHelp = action.payload;
+    actionUpdateShowHelp: (state) => {
+      state.showHelp = !state.showHelp;
     },
   },
 });

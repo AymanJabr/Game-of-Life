@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
+import { useAppSelector, useAppDispatch } from "../react/hooks";
+
+import { actionUpdateShowHelp, getShowHelp } from "../react/slices/statsSlice";
+
+
 
 import styled from "styled-components";
 
@@ -31,13 +36,29 @@ const HelpWindowContainer = () => {
     }
   `;
 
+  const dispatch = useAppDispatch()
+
+  const showHelp  = useAppSelector((state) => getShowHelp(state))
+
+  const closeWindowButton = () => {
+    dispatch(actionUpdateShowHelp())
+  }
+
+  const closeWindow = (e) => {
+    if (e.target == document.getElementById("HelpWindowContainer")) {
+      dispatch(actionUpdateShowHelp());
+    }
+  }
+
   return (
-    <HelpWindowContainerStyle id="HelpWindowContainer" className="ninja">
+    <HelpWindowContainerStyle id="HelpWindowContainer" className={`${showHelp ? '' : 'ninja'}`} 
+          onClick={closeWindow}>
       <HelpWindowStyle id="HelpWindow">
         <img
           className="closeButton"
           src="./images/close-button.png"
           alt="close button"
+          onClick={closeWindowButton}
         ></img>
         <h1>Game of Life Rules</h1>
         <p>
