@@ -25,12 +25,10 @@ export const cellsSlice = createSlice({
   name: "cells",
   initialState,
   reducers: {
-    // decrement: (state) => {
-    //   state.value -= 1;
-    // },
     actionUpdateCells: (state, action: PayloadAction<Array<Array<number>>>) => {
       state.cells = action.payload;
     },
+    
   },
 });
 
