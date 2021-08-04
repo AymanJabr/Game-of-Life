@@ -1,10 +1,15 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { useAppSelector, useAppDispatch } from "../react/hooks";
+
+import { actionUpdateShowHelp, actionUpdateShowAdd, getShowHelp, getShowAdd, getGenerationNumber} from "../react/slices/statsSlice";
+
 import styled from "styled-components";
 
 import CellsWindowContainer from "./CellsWindowContainer";
 
-
 const GamePanel = () => {
-
   const GamePanelStyle = styled.div`
     position: fixed;
     top: 0;
@@ -50,11 +55,36 @@ const GamePanel = () => {
     }
   `;
 
+  const GenerationCounterStyle = styled.h2 `
+    position: fixed;
+    top: 1vh;
+    left: 10px;
+    margin-top: 0;
+  `
+
+  const generationNumber = useAppSelector((state) => getGenerationNumber(state))
+
+  const dispatch = useAppDispatch()
+
+  const changeShowHelpVisibility = () => {
+    dispatch(actionUpdateShowHelp())
+  }
+  const changeShowAddVisibility = () => {
+    dispatch(actionUpdateShowAdd())
+  }
+
   return (
     <GamePanelStyle id="GamePanel">
       <CellsWindowContainer />
-      <AddButtonStyle id="addButtonIcon">+</AddButtonStyle>
-      <HelpButtonStyle id="helpButtonIcon">?</HelpButtonStyle>
+      <AddButtonStyle onClick={changeShowAddVisibility} id="addButtonIcon">
+        +
+      </AddButtonStyle>
+      <HelpButtonStyle onClick={changeShowHelpVisibility} id="helpButtonIcon">
+        ?
+      </HelpButtonStyle>
+      <GenerationCounterStyle>
+        Generation = {generationNumber}
+      </GenerationCounterStyle>
     </GamePanelStyle>
   );
 };

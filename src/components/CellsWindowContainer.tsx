@@ -1,5 +1,9 @@
+import React, { useState, useEffect } from "react";
+import { useAppSelector, useAppDispatch } from "../react/hooks";
+
+import { actionUpdateCells, getCells } from "../react/slices/cellsSlice";
+
 import styled from "styled-components";
-import "../index.css";
 
 const CellsWindowContainer = () => {
   const CellsWindowContainerStyle = styled.div`
@@ -28,44 +32,58 @@ const CellsWindowContainer = () => {
     cursor: pointer;
   `;
 
+  const gameCells = useAppSelector((state) => getCells(state));
+  const dispatch = useAppDispatch();
+
+
+  const switchCell = (rowIndex, columnIndex) => {
+
+    const newGameCells : number[][] = []
+    
+    gameCells.map((row, firstIndex) => {
+      if(firstIndex == rowIndex) {
+        const newGameRow : number[] = []
+        row.map((column, secondIndex) => {
+          if(secondIndex == columnIndex) {
+            const myCell = column == 1 ? 0 : 1;
+            newGameRow.push(myCell);
+          } else {
+            newGameRow.push(gameCells[firstIndex][secondIndex]);
+          }
+        })
+
+        newGameCells.push(newGameRow)
+      } else {
+        newGameCells.push(gameCells[firstIndex])
+      }
+    })
+
+    dispatch(actionUpdateCells(newGameCells))
+  }
+
+
   return (
     <CellsWindowContainerStyle id="CellsWindowContainer">
       <CellsWindowStyle id="CellsWindow">
-        <CellRowStyle className="cellRow">
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell checked"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-        </CellRowStyle>
-        <CellRowStyle className="cellRow">
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-        </CellRowStyle>
-        <CellRowStyle className="cellRow">
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-        </CellRowStyle>
-        <CellRowStyle className="cellRow">
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-        </CellRowStyle>
-        <CellRowStyle className="cellRow">
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-          <CellStyle className="cell"></CellStyle>
-        </CellRowStyle>
+        {gameCells.map((row, rowIndex) => (
+          <CellRowStyle className="cellRow" key={rowIndex}>
+            {row.map((cell, columIndex) =>
+              cell == 1 ? (
+                <CellStyle
+                  className="cell checked"
+                  key={[rowIndex, columIndex]}
+                  onClick={() => switchCell(rowIndex, columIndex)}
+                ></CellStyle>
+              ) : (
+                <CellStyle
+                  className="cell"
+                  key={[rowIndex, columIndex]}
+                  onClick={() => switchCell(rowIndex, columIndex)}
+                ></CellStyle>
+              )
+            )}
+          </CellRowStyle>
+        ))}
       </CellsWindowStyle>
     </CellsWindowContainerStyle>
   );

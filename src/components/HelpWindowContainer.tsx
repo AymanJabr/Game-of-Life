@@ -1,7 +1,14 @@
+import { useEffect, useState } from "react";
+
+import { useAppSelector, useAppDispatch } from "../react/hooks";
+
+import { actionUpdateShowHelp, getShowHelp } from "../react/slices/statsSlice";
+
+
+
 import styled from "styled-components";
 
 const HelpWindowContainer = () => {
-
   const HelpWindowContainerStyle = styled.div`
     position: fixed;
     top: 0;
@@ -29,14 +36,32 @@ const HelpWindowContainer = () => {
     }
   `;
 
+  const dispatch = useAppDispatch()
+
+  const showHelp  = useAppSelector((state) => getShowHelp(state))
+
+  const closeWindowButton = () => {
+    dispatch(actionUpdateShowHelp())
+  }
+
+  const closeWindow = (e) => {
+    if (e.target == document.getElementById("HelpWindowContainer")) {
+      dispatch(actionUpdateShowHelp());
+    }
+  }
 
   return (
-    <HelpWindowContainerStyle id="HelpWindowContainer" className="ninja">
+    <HelpWindowContainerStyle
+      id="HelpWindowContainer"
+      className={`${showHelp ? "" : "ninja"}`}
+      onClick={closeWindow}
+    >
       <HelpWindowStyle id="HelpWindow">
         <img
           className="closeButton"
           src="./images/close-button.png"
           alt="close button"
+          onClick={closeWindowButton}
         ></img>
         <h1>Game of Life Rules</h1>
         <p>
@@ -45,28 +70,28 @@ const HelpWindowContainer = () => {
           interacts with its eight neighbors, which are the cells that are
           horizontally, vertically, or diagonally adjacent. <br />
           <br /> At each step in time, the following transitions occur:
-          <ol>
-            <li>
-              Any live cell with fewer than two live neighbors dies, as if by
-              underpopulation.
-            </li>
-            <br />
-            <li>
-              Any live cell with two or three live neighbors lives on to the
-              next generation.
-            </li>
-            <br />
-            <li>
-              Any live cell with more than three live neighbors dies, as if by
-              overpopulation.
-            </li>
-            <br />
-            <li>
-              Any dead cell with exactly three live neighbors becomes a live
-              cell, as if by reproduction.
-            </li>
-          </ol>
         </p>
+        <ol>
+          <li>
+            Any live cell with fewer than two live neighbors dies, as if by
+            underpopulation.
+          </li>
+          <br />
+          <li>
+            Any live cell with two or three live neighbors lives on to the next
+            generation.
+          </li>
+          <br />
+          <li>
+            Any live cell with more than three live neighbors dies, as if by
+            overpopulation.
+          </li>
+          <br />
+          <li>
+            Any dead cell with exactly three live neighbors becomes a live cell,
+            as if by reproduction.
+          </li>
+        </ol>
       </HelpWindowStyle>
     </HelpWindowContainerStyle>
   );
