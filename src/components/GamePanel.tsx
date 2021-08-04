@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useAppSelector, useAppDispatch } from "../react/hooks";
 
-import { actionUpdateShowHelp, actionUpdateShowAdd, getShowHelp, getShowAdd } from "../react/slices/statsSlice";
+import { actionUpdateShowHelp, actionUpdateShowAdd, getShowHelp, getShowAdd, getGenerationNumber} from "../react/slices/statsSlice";
 
 import styled from "styled-components";
 
@@ -55,12 +55,20 @@ const GamePanel = () => {
     }
   `;
 
+  const GenerationCounterStyle = styled.h2 `
+    position: fixed;
+    top: 1vh;
+    left: 10px;
+    margin-top: 0;
+  `
+
+  const generationNumber = useAppSelector((state) => getGenerationNumber(state))
+
   const dispatch = useAppDispatch()
 
   const changeShowHelpVisibility = () => {
     dispatch(actionUpdateShowHelp())
   }
-
   const changeShowAddVisibility = () => {
     dispatch(actionUpdateShowAdd())
   }
@@ -74,6 +82,9 @@ const GamePanel = () => {
       <HelpButtonStyle onClick={changeShowHelpVisibility} id="helpButtonIcon">
         ?
       </HelpButtonStyle>
+      <GenerationCounterStyle>
+        Generation = {generationNumber}
+      </GenerationCounterStyle>
     </GamePanelStyle>
   );
 };

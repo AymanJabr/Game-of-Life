@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../react/hooks";
 
 import {
+  actionUpdateGenerationNumber,
   actionUpdateSpeed,
   actionUpdateStatus,
+  getGenerationNumber,
   getSpeed,
   getStatus,
 } from "../react/slices/statsSlice";
@@ -59,20 +61,20 @@ const GameControls = () => {
 
   const gameSpeed = useAppSelector((state) => getSpeed(state));
   const gameStatus: any = useAppSelector((state) => getStatus(state));
+  const generationNumber = useAppSelector((state) => getGenerationNumber(state))
 
   const gameCells = useAppSelector((state) => getCells(state));
   const gameOriginalCells = useAppSelector((state) => getOriginalCells(state));
 
   useEffect(() => {
-
-    setTimeout(() => {
+    const interval = setInterval(() => {
       if (gameStatus == "playing") {
-        window.console.log(`speed is: ${2000/gameSpeed} ms`);
+        window.console.log(`speed is: ${2000 / gameSpeed} ms`);
         moveToNextStep();
       }
-    }, 1000/gameSpeed)
-
-  },[gameCells, gameStatus])
+    }, 1000 / gameSpeed);
+    return () => clearInterval(interval);
+  }, [generationNumber ,gameStatus]);
 
   const changeSpeed = (e) => {
     dispatch(actionUpdateSpeed(e.target.value));
@@ -92,8 +94,9 @@ const GameControls = () => {
   };
 
   const stopGame = () => {
-    dispatch(actionUpdateCells(gameOriginalCells));
     dispatch(actionUpdateStatus("stopped"));
+    dispatch(actionUpdateGenerationNumber(0))
+    dispatch(actionUpdateCells(gameOriginalCells));
   };
 
   const moveToNextStep = () => {
@@ -167,6 +170,7 @@ const GameControls = () => {
     });
 
     dispatch(actionUpdateCells(newCells));
+    dispatch(actionUpdateGenerationNumber(generationNumber + 1));
   };
 
   const PlayControls = () => {
