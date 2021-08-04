@@ -63,6 +63,17 @@ const GameControls = () => {
   const gameCells = useAppSelector((state) => getCells(state));
   const gameOriginalCells = useAppSelector((state) => getOriginalCells(state));
 
+  useEffect(() => {
+
+    setTimeout(() => {
+      if (gameStatus == "playing") {
+        window.console.log(`speed is: ${2000/gameSpeed} ms`);
+        moveToNextStep();
+      }
+    }, 1000/gameSpeed)
+
+  },[gameCells, gameStatus])
+
   const changeSpeed = (e) => {
     dispatch(actionUpdateSpeed(e.target.value));
   };
@@ -94,8 +105,6 @@ const GameControls = () => {
     for (let i = 0; i < height; i++) {
       newCells[i] = new Array(width);
     }
-
-    window.console.log(newCells);
 
     gameCells.map((row, rowIndex) => {
       row.map((cell, columnIndex) => {
@@ -145,19 +154,17 @@ const GameControls = () => {
           }
         }
 
-        let newCell: number
+        let newCell: number;
 
-        if(cell == 1) {
+        if (cell == 1) {
           newCell = count > 1 && count < 4 ? 1 : 0;
         } else {
-          newCell = count == 3 ? 1 : 0
+          newCell = count == 3 ? 1 : 0;
         }
 
         newCells[rowIndex][columnIndex] = newCell;
       });
     });
-
-    window.console.log(newCells);
 
     dispatch(actionUpdateCells(newCells));
   };
