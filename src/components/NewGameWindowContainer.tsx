@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../react/hooks";
 
 import {  actionUpdateShowAdd, getShowAdd } from "../react/slices/statsSlice";
+import { actionUpdateCells } from "../react/slices/cellsSlice";
 
 
 import styled from "styled-components";
@@ -82,6 +83,39 @@ const NewGameWindowContainer = () => {
     dispatch(actionUpdateShowAdd());
   };
 
+  const newGameFromDimensions = () => {
+    const heightElement: HTMLInputElement = document.getElementById("Height") as HTMLInputElement
+    const widthElement: HTMLInputElement = document.getElementById("Width") as HTMLInputElement
+
+    // window.console.log(`heightElement: ${heightElement}, widthElement: ${widthElement}`);
+
+
+    let height = parseInt(heightElement.value) ;
+    let width = parseInt(widthElement.value);
+
+    // window.console.log(`height: ${height}, width: ${width}`);
+
+
+    height = isNaN(height) ? 6 : height ;
+    width = isNaN(width) ? 6 : width ;   
+
+    window.console.log(`height: ${height}, width: ${width}`)
+
+    const newCells: number[][] = new Array(height);
+
+    for (let i = 0; i < height; i++) {
+      newCells[i] = new Array(width);
+      for (let j = 0; j < width; j++) {
+        newCells[i][j] = 0
+      }
+    }
+
+    window.console.log(newCells)
+
+    dispatch(actionUpdateCells(newCells))
+    dispatch(actionUpdateShowAdd())
+  }
+
   const closeWindow = (e) => {
     if (e.target == document.getElementById("NewGameWindowContainer")) {
       dispatch(actionUpdateShowAdd());
@@ -110,7 +144,8 @@ const NewGameWindowContainer = () => {
               <input type="number" name="height" id="Height" min="3" />
             </NewGameInputContainerStyle>
           </InputContainerStyle>
-          <CreateGameButtonStyle id="CreateGameButton">
+          <CreateGameButtonStyle id="CreateGameButton"
+          onClick={newGameFromDimensions}>
             Create Game
           </CreateGameButtonStyle>
         </NewGameWindowElementStyle>
