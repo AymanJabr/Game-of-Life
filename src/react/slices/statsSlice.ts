@@ -8,6 +8,7 @@ interface StatsState {
   generationNumber: number;
   showAdd: boolean;
   showHelp: boolean;
+  wrongFileFormat: boolean;
 }
 
 // Define the initial state using that type
@@ -17,6 +18,7 @@ const initialState: StatsState = {
   generationNumber: 0,
   showAdd: false,
   showHelp: false,
+  wrongFileFormat: false
 };
 
 export const statsSlice = createSlice({
@@ -38,10 +40,13 @@ export const statsSlice = createSlice({
     actionUpdateShowHelp: (state) => {
       state.showHelp = !state.showHelp;
     },
+    actionUpdateWrongFileFormat: (state) => {
+      state.wrongFileFormat = !state.wrongFileFormat;
+    },
   },
 });
 
-export const { actionUpdateSpeed, actionUpdateStatus, actionUpdateGenerationNumber, actionUpdateShowAdd, actionUpdateShowHelp } = statsSlice.actions;
+export const { actionUpdateSpeed, actionUpdateStatus, actionUpdateGenerationNumber, actionUpdateShowAdd, actionUpdateShowHelp, actionUpdateWrongFileFormat } = statsSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const getSpeed = (state: RootState) => state.stats.speed
@@ -49,5 +54,6 @@ export const getStatus = (state: RootState) => state.stats.status;
 export const getGenerationNumber = (state: RootState) => state.stats.generationNumber;
 export const getShowAdd = (state: RootState) => state.stats.showAdd;
 export const getShowHelp = (state: RootState) => state.stats.showHelp;
+export const getWrongFileFormat = (state: RootState) => state.stats.wrongFileFormat;
 
 export default statsSlice.reducer;
