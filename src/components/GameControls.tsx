@@ -1,9 +1,19 @@
 import { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../react/hooks";
 
-import { actionUpdateSpeed, actionUpdateStatus, getSpeed, getStatus } from "../react/slices/statsSlice";
+import {
+  actionUpdateSpeed,
+  actionUpdateStatus,
+  getSpeed,
+  getStatus,
+} from "../react/slices/statsSlice";
 
-import { actionUpdateOriginalCells, actionUpdateCells, getOriginalCells, getCells } from "../react/slices/cellsSlice";
+import {
+  actionUpdateOriginalCells,
+  actionUpdateCells,
+  getOriginalCells,
+  getCells,
+} from "../react/slices/cellsSlice";
 
 import styled from "styled-components";
 
@@ -44,26 +54,23 @@ const SpeedControlStyle = styled.div`
   align-items: center;
 `;
 
-
-
 const GameControls = () => {
-
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const gameSpeed = useAppSelector((state) => getSpeed(state));
   const gameStatus: any = useAppSelector((state) => getStatus(state));
 
-  const gameCells = useAppSelector((state) => getCells(state))
-  const gameOriginalCells = useAppSelector((state) => getOriginalCells(state))
+  const gameCells = useAppSelector((state) => getCells(state));
+  const gameOriginalCells = useAppSelector((state) => getOriginalCells(state));
 
   const changeSpeed = (e) => {
-    dispatch(actionUpdateSpeed(e.target.value))
-  }
+    dispatch(actionUpdateSpeed(e.target.value));
+  };
 
   const startGame = () => {
-    dispatch(actionUpdateOriginalCells(gameCells))
-    dispatch(actionUpdateStatus("playing"))
-  }
+    dispatch(actionUpdateOriginalCells(gameCells));
+    dispatch(actionUpdateStatus("playing"));
+  };
 
   const continueGame = () => {
     dispatch(actionUpdateStatus("playing"));
@@ -71,41 +78,104 @@ const GameControls = () => {
 
   const pauseGame = () => {
     dispatch(actionUpdateStatus("paused"));
-  }
+  };
 
   const stopGame = () => {
-    dispatch(actionUpdateCells(gameOriginalCells))
+    dispatch(actionUpdateCells(gameOriginalCells));
     dispatch(actionUpdateStatus("stopped"));
-  }
+  };
 
   const moveToNextStep = () => {
+    const height = gameCells.length;
+    const width = gameCells[0].length;
 
-    let newCells = gameCells
+    const newCells: number[][] = new Array(height);
 
-    const width = newCells.length
-    const height = newCells[0].length
+    for (let i = 0; i < height; i++) {
+      newCells[i] = new Array(width);
+    }
 
-    newCells.map((row, rowIndex) => {
+    window.console.log(newCells);
+
+    gameCells.map((row, rowIndex) => {
       row.map((cell, columnIndex) => {
-        let count = 0
+        let count = 0;
 
+        // Checking horizontally and vertically
+        if (rowIndex !== 0) {
+          if (gameCells[rowIndex - 1][columnIndex] == 1) {
+            count += 1;
+          }
+        }
+        if (rowIndex !== height - 1) {
+          if (gameCells[rowIndex + 1][columnIndex] == 1) {
+            count += 1;
+          }
+        }
+        if (columnIndex !== 0) {
+          if (gameCells[rowIndex][columnIndex - 1] == 1) {
+            count += 1;
+          }
+        }
+        if (columnIndex !== width - 1) {
+          if (gameCells[rowIndex][columnIndex + 1] == 1) {
+            count += 1;
+          }
+        }
 
+        // Checking diagonally
+        if (rowIndex !== 0 && columnIndex !== 0) {
+          if (gameCells[rowIndex - 1][columnIndex - 1] == 1) {
+            count += 1;
+          }
+        }
+        if (rowIndex !== height - 1 && columnIndex !== 0) {
+          if (gameCells[rowIndex + 1][columnIndex - 1] == 1) {
+            count += 1;
+          }
+        }
+        if (rowIndex !== 0 && columnIndex !== width - 1) {
+          if (gameCells[rowIndex - 1][columnIndex + 1] == 1) {
+            count += 1;
+          }
+        }
+        if (rowIndex !== height - 1 && columnIndex !== width - 1) {
+          if (gameCells[rowIndex + 1][columnIndex + 1] == 1) {
+            count += 1;
+          }
+        }
 
-      })
-    })
+        let newCell: number
 
-  }
+        if(cell == 1) {
+          newCell = count > 1 && count < 4 ? 1 : 0;
+        } else {
+          newCell = count == 3 ? 1 : 0
+        }
+
+        newCells[rowIndex][columnIndex] = newCell;
+      });
+    });
+
+    window.console.log(newCells);
+
+    dispatch(actionUpdateCells(newCells));
+  };
 
   const PlayControls = () => {
-    switch(gameStatus) {
-      case "stopped": 
+    switch (gameStatus) {
+      case "stopped":
         return (
           <ControlStyle className="control">
-            <ControlButtonStyle className="controlButtons" id="StartButton" onClick={startGame}>
+            <ControlButtonStyle
+              className="controlButtons"
+              id="StartButton"
+              onClick={startGame}
+            >
               Start
             </ControlButtonStyle>
           </ControlStyle>
-        )
+        );
 
       case "playing":
         return (
@@ -127,56 +197,63 @@ const GameControls = () => {
           </ControlStyle>
         );
 
-      case "paused": 
-          return (
-            <ControlStyle className="control">
-              <ControlButtonStyle
-                className="controlButtons"
-                id="StartButton"
-                onClick={continueGame}
-              >
-                Continue
-              </ControlButtonStyle>
-              <ControlButtonStyle className="controlButtons" id="PauseButton">
-                Next Step
-              </ControlButtonStyle>
-              <ControlButtonStyle
-                className="controlButtons"
-                id="StopButton"
-                onClick={stopGame}
-              >
-                Stop
-              </ControlButtonStyle>
-            </ControlStyle>
-          );
+      case "paused":
+        return (
+          <ControlStyle className="control">
+            <ControlButtonStyle
+              className="controlButtons"
+              id="StartButton"
+              onClick={continueGame}
+            >
+              Continue
+            </ControlButtonStyle>
+            <ControlButtonStyle
+              className="controlButtons"
+              id="PauseButton"
+              onClick={moveToNextStep}
+            >
+              Next Step
+            </ControlButtonStyle>
+            <ControlButtonStyle
+              className="controlButtons"
+              id="StopButton"
+              onClick={stopGame}
+            >
+              Stop
+            </ControlButtonStyle>
+          </ControlStyle>
+        );
 
-          default:
-            return (
-              <ControlStyle className="control">
-                <ControlButtonStyle
-                  className="controlButtons"
-                  id="StartStopButton"
-                  onClick={startGame}
-                >
-                  Start
-                </ControlButtonStyle>
-              </ControlStyle>
-            );
-
-      
-
+      default:
+        return (
+          <ControlStyle className="control">
+            <ControlButtonStyle
+              className="controlButtons"
+              id="StartStopButton"
+              onClick={startGame}
+            >
+              Start
+            </ControlButtonStyle>
+          </ControlStyle>
+        );
     }
-  }
+  };
 
   return (
     <GameControlsStyle id="GameControls">
       <SpeedControlStyle className="control" id="SpeedControl">
         <h2 id="SpeedControlText">Speed: {gameSpeed}</h2>
-        <input type="range" min="0.25" max="4" step="0.25" defaultValue={`${gameSpeed}`} onInput={changeSpeed} />
-      </SpeedControlStyle>   
+        <input
+          type="range"
+          min="0.25"
+          max="4"
+          step="0.25"
+          defaultValue={`${gameSpeed}`}
+          onInput={changeSpeed}
+        />
+      </SpeedControlStyle>
 
-      <PlayControls /> 
-        
+      <PlayControls />
     </GameControlsStyle>
   );
 };
