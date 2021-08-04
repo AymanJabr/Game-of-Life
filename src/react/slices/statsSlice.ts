@@ -12,7 +12,7 @@ interface StatsState {
 
 // Define the initial state using that type
 const initialState: StatsState = {
-  speed: 1,
+  speed: 2,
   status: "stopped",
   generationNumber: 0,
   showAdd: false,
