@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useAppSelector, useAppDispatch } from "../react/hooks";
 
 import {
@@ -76,7 +76,7 @@ const GameControls = () => {
     return () => clearInterval(interval);
   }, [generationNumber ,gameStatus]);
 
-  const changeSpeed = (e) => {
+  const changeSpeed = (e: { target: {value: number} }) => {
     dispatch(actionUpdateSpeed(e.target.value));
   };
 
@@ -260,7 +260,7 @@ const GameControls = () => {
           max="4"
           step="0.25"
           defaultValue={`${gameSpeed}`}
-          onInput={changeSpeed}
+          onInput={() => changeSpeed}
         />
       </SpeedControlStyle>
 

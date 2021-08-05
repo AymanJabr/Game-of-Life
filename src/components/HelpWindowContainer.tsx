@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import { useAppSelector, useAppDispatch } from "../react/hooks";
 
 import { actionUpdateShowHelp, getShowHelp } from "../react/slices/statsSlice";
@@ -44,17 +42,17 @@ const HelpWindowContainer = () => {
     dispatch(actionUpdateShowHelp())
   }
 
-  const closeWindow = (e) => {
+  const closeWindow = (e: React.MouseEvent<Element, MouseEvent>): void => {
     if (e.target == document.getElementById("HelpWindowContainer")) {
       dispatch(actionUpdateShowHelp());
     }
-  }
+  };
 
   return (
     <HelpWindowContainerStyle
       id="HelpWindowContainer"
       className={`${showHelp ? "" : "ninja"}`}
-      onClick={closeWindow}
+      onClick={(e) => closeWindow(e)}
     >
       <HelpWindowStyle id="HelpWindow">
         <img
