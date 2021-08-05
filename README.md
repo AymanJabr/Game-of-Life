@@ -23,6 +23,8 @@ See Live version of app [here](https://worldwide-covid-statistics.netlify.app/)
 - ES6
 - jest
 
+## 
+
 ## Getting Started
 
 To get a local copy up and running follow these steps.
