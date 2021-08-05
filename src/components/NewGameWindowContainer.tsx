@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import { useAppSelector, useAppDispatch } from "../react/hooks";
 
 import {
@@ -12,7 +10,11 @@ import { actionUpdateCells } from "../react/slices/cellsSlice";
 
 import styled from "styled-components";
 
-const NewGameWindowContainer = () => {
+
+type NewGameWindowContainerProps = {
+};
+
+const NewGameWindowContainer: React.FunctionComponent<NewGameWindowContainerProps> = () => {
   const NewGameWindowContainerStyle = styled.div`
     position: fixed;
     top: 0;
@@ -124,8 +126,9 @@ const NewGameWindowContainer = () => {
     }
   };
 
-  const newGameFromFile = (e) => {
+  const newGameFromFile = (e: { target: HTMLInputElement }) => {
     const fileReader = new FileReader();
+    if (!e.target.files) return;
     fileReader.readAsText(e.target.files[0], "UTF-8");
     fileReader.onload = (e) => {
       if (
@@ -159,15 +162,14 @@ const NewGameWindowContainer = () => {
             });
           });
         } catch (e) {
-          correctInput = false
+          correctInput = false;
         }
-        
 
         if (correctInput) {
           dispatch(actionUpdateCells(newCells));
           dispatch(actionUpdateShowAdd());
-          if(wrongFileFormat){
-            dispatch(actionUpdateWrongFileFormat())
+          if (wrongFileFormat) {
+            dispatch(actionUpdateWrongFileFormat());
           }
         } else {
           dispatch(actionUpdateWrongFileFormat());
@@ -178,7 +180,7 @@ const NewGameWindowContainer = () => {
     };
   };
 
-  const closeWindow = (e) => {
+  const closeWindow = (e: React.MouseEvent<Element, MouseEvent>): void => {
     if (e.target == document.getElementById("NewGameWindowContainer")) {
       dispatch(actionUpdateShowAdd());
       if (wrongFileFormat) {
@@ -191,7 +193,7 @@ const NewGameWindowContainer = () => {
     <NewGameWindowContainerStyle
       id="NewGameWindowContainer"
       className={`${showAdd ? "" : "ninja"}`}
-      onClick={closeWindow}
+      onClick={(e) => closeWindow(e)}
     >
       <NewGameWindowStyle id="NewGameWindow">
         <img

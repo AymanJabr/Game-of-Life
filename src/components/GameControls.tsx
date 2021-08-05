@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useAppSelector, useAppDispatch } from "../react/hooks";
 
 import {
@@ -56,11 +56,15 @@ const SpeedControlStyle = styled.div`
   align-items: center;
 `;
 
-const GameControls = () => {
+
+type GameControlProps = {
+};
+
+const GameControls: React.FunctionComponent<GameControlProps> = () => {
   const dispatch = useAppDispatch();
 
   const gameSpeed = useAppSelector((state) => getSpeed(state));
-  const gameStatus: any = useAppSelector((state) => getStatus(state));
+  const gameStatus = useAppSelector((state) => getStatus(state));
   const generationNumber = useAppSelector((state) => getGenerationNumber(state))
 
   const gameCells = useAppSelector((state) => getCells(state));
@@ -76,8 +80,8 @@ const GameControls = () => {
     return () => clearInterval(interval);
   }, [generationNumber ,gameStatus]);
 
-  const changeSpeed = (e) => {
-    dispatch(actionUpdateSpeed(e.target.value));
+  const changeSpeed = (value : string) => {
+    dispatch(actionUpdateSpeed(parseFloat(value)));
   };
 
   const startGame = () => {
@@ -260,7 +264,7 @@ const GameControls = () => {
           max="4"
           step="0.25"
           defaultValue={`${gameSpeed}`}
-          onInput={changeSpeed}
+          onInput={(e) => changeSpeed(e.currentTarget.value)}
         />
       </SpeedControlStyle>
 

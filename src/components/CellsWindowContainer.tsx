@@ -1,16 +1,32 @@
-import React, { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../react/hooks";
 
 import { actionUpdateCells, getCells } from "../react/slices/cellsSlice";
 
 import styled from "styled-components";
 
-const CellsWindowContainer = () => {
+type CellsWindowsContainerProps = {
+};
+
+const CellsWindowContainer: React.FunctionComponent<CellsWindowsContainerProps> = () => {
+
+  const gameCells = useAppSelector((state) => getCells(state));
+  const dispatch = useAppDispatch();
+
+  const cellsNumber = gameCells.length >= gameCells[0].length ? gameCells.length : gameCells[0].length
+  let cellLength = Math.floor(10 / (cellsNumber/8));
+  cellLength = cellLength > 4 ? 4 : cellLength
+  cellLength = cellLength < 1 ? 1 : cellLength;
+
   const CellsWindowContainerStyle = styled.div`
     height: 100%;
   `;
 
   const CellsWindowStyle = styled.div`
+    position: absolute;
+    top: 2vh;
+    left: 0;
+    right: 0;
+    margin: 2rem auto;
     height: 100%;
     flex-direction: column;
     display: flex;
@@ -23,20 +39,16 @@ const CellsWindowContainer = () => {
   `;
 
   const CellStyle = styled.div`
-    height: 3vw;
-    width: 3vw;
+    height: ${cellLength}vw;
+    width: ${cellLength}vw;
     background-color: var(--main-black);
     border: 3px solid var(--main-light-gray);
-    margin: 1vw;
+    margin: 0;
     border-radius: 5px;
     cursor: pointer;
   `;
 
-  const gameCells = useAppSelector((state) => getCells(state));
-  const dispatch = useAppDispatch();
-
-
-  const switchCell = (rowIndex, columnIndex) => {
+  const switchCell = (rowIndex : number, columnIndex : number) => {
 
     const newGameCells : number[][] = []
     
@@ -71,13 +83,13 @@ const CellsWindowContainer = () => {
               cell == 1 ? (
                 <CellStyle
                   className="cell checked"
-                  key={[rowIndex, columIndex]}
+                  key={columIndex}
                   onClick={() => switchCell(rowIndex, columIndex)}
                 ></CellStyle>
               ) : (
                 <CellStyle
                   className="cell"
-                  key={[rowIndex, columIndex]}
+                  key={columIndex}
                   onClick={() => switchCell(rowIndex, columIndex)}
                 ></CellStyle>
               )

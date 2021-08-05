@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
 import { useAppSelector, useAppDispatch } from "../react/hooks";
 
-import { actionUpdateShowHelp, actionUpdateShowAdd, getShowHelp, getShowAdd, getGenerationNumber} from "../react/slices/statsSlice";
+import { actionUpdateShowHelp, actionUpdateShowAdd, getGenerationNumber} from "../react/slices/statsSlice";
 
 import styled from "styled-components";
 
 import CellsWindowContainer from "./CellsWindowContainer";
 
-const GamePanel = () => {
+type GamePanelProps = {
+};
+
+const GamePanel: React.FunctionComponent<GamePanelProps> = () => {
   const GamePanelStyle = styled.div`
     position: fixed;
     top: 0;
@@ -20,9 +20,9 @@ const GamePanel = () => {
   `;
 
   const AddButtonStyle = styled.button`
-    position: absolute;
+    position: fixed;
     top: 3vh;
-    right: 10px;
+    right: 25px;
     border-radius: 50%;
     background: var(--main-red);
     color: var(--main-white);
@@ -38,9 +38,9 @@ const GamePanel = () => {
   `;
 
   const HelpButtonStyle = styled.button`
-    position: absolute;
+    position: fixed;
     top: 12vh;
-    right: 10px;
+    right: 25px;
     border-radius: 50%;
     background: var(--main-black);
     color: var(--main-white);
