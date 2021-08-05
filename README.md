@@ -11,33 +11,36 @@ The goal of the game is to simulate a population of cells/beings, where each cel
 
 # Live version
 
-See Live version of app [here](https://worldwide-covid-statistics.netlify.app/)
+See Live version of app here: [Game of Life](https://game-of-life-ayman.netlify.app/)
 
 ## Built With
-- Node.js
+- Node.js/npm
 - React
 - Redux
 - Typescript
 - Styled Components
 - CSS
 - ES6
-- jest
+- Jest-Dom
 
-## 
 
 ## Getting Started
 
 To get a local copy up and running follow these steps.
 
-1. Clone or copy repository, and navigate to the the `development` branch
+1. Clone or copy repository, and navigate to the the `development` branch (which is the default branch).
 
-2. run `npm install` to install node packages
+2. run `npm install` to install node packages.
 
 3. run `npm start` to start the app in the `localhost:3000`, this will start the app in a new browser tab.
 
 ## Testing
 
-Testing has been done using jest snapshots to test components, run using `npm test`.
+Run tests on updated files using `npm test`.
+
+## Deployment
+
+Run `npm deploy` to create deploy file.
 
 ## AUTHOR
 
