@@ -56,11 +56,15 @@ const SpeedControlStyle = styled.div`
   align-items: center;
 `;
 
-const GameControls = () => {
+
+type GameControlProps = {
+};
+
+const GameControls: React.FunctionComponent<GameControlProps> = () => {
   const dispatch = useAppDispatch();
 
   const gameSpeed = useAppSelector((state) => getSpeed(state));
-  const gameStatus: any = useAppSelector((state) => getStatus(state));
+  const gameStatus = useAppSelector((state) => getStatus(state));
   const generationNumber = useAppSelector((state) => getGenerationNumber(state))
 
   const gameCells = useAppSelector((state) => getCells(state));

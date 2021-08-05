@@ -10,7 +10,11 @@ import { actionUpdateCells } from "../react/slices/cellsSlice";
 
 import styled from "styled-components";
 
-const NewGameWindowContainer = () => {
+
+type NewGameWindowContainerProps = {
+};
+
+const NewGameWindowContainer: React.FunctionComponent<NewGameWindowContainerProps> = () => {
   const NewGameWindowContainerStyle = styled.div`
     position: fixed;
     top: 0;

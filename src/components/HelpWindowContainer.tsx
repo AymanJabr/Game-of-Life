@@ -3,10 +3,13 @@ import { useAppSelector, useAppDispatch } from "../react/hooks";
 import { actionUpdateShowHelp, getShowHelp } from "../react/slices/statsSlice";
 
 
-
 import styled from "styled-components";
 
-const HelpWindowContainer = () => {
+type HelpWindowContainerProps = {
+};
+
+const HelpWindowContainer: React.FunctionComponent<HelpWindowContainerProps> = () => {
+  
   const HelpWindowContainerStyle = styled.div`
     position: fixed;
     top: 0;

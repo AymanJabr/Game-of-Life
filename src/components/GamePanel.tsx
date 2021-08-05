@@ -6,7 +6,10 @@ import styled from "styled-components";
 
 import CellsWindowContainer from "./CellsWindowContainer";
 
-const GamePanel = () => {
+type GamePanelProps = {
+};
+
+const GamePanel: React.FunctionComponent<GamePanelProps> = () => {
   const GamePanelStyle = styled.div`
     position: fixed;
     top: 0;

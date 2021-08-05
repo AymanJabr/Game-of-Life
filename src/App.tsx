@@ -5,7 +5,11 @@ import HelpWindowContainer from "./components/HelpWindowContainer";
 import NewGameWindowContainer from "./components/NewGameWindowContainer";
 import "./index.css";
 
-function App() {
+type AppProps = {
+};
+
+const App: React.FunctionComponent<AppProps> = () => {
+
   return (
     <div className="App">
       <GamePanel />

@@ -4,7 +4,11 @@ import { actionUpdateCells, getCells } from "../react/slices/cellsSlice";
 
 import styled from "styled-components";
 
-const CellsWindowContainer = () => {
+type CellsWindowsContainerProps = {
+};
+
+const CellsWindowContainer: React.FunctionComponent<CellsWindowsContainerProps> = () => {
+
   const gameCells = useAppSelector((state) => getCells(state));
   const dispatch = useAppDispatch();
 
