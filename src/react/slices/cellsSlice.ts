@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 
+/* eslint-disable  @typescript-eslint/explicit-module-boundary-types */
+
 // Define a type for the slice state
 export interface CellsState {
   cells: Array<Array<number>>,
