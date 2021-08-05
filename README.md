@@ -1,44 +1,59 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# GAME OF LIFE
 
-## Available Scripts
+Implementation of the famous Conway's 'Game of Life' program. This projects aims to solve the following Extendi code Kata: https://github.com/extendi/game-of-life
 
-In the project directory, you can run:
+The goal of the game is to simulate a population of cells/beings, where each cell can be alive or dead. The cells can change from alive to dead and vice verse on each generation. The rules are as follows:
+1. Any live cell with fewer than two live neighbors dies, as if by underpopulation.
+2. Any live cell with two or three live neighbors lives on to the next generation.
+3. Any live cell with more than three live neighbors dies, as if by overpopulation.
+4. Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
 
-### `yarn start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Live version
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+See Live version of app [here](https://worldwide-covid-statistics.netlify.app/)
 
-### `yarn test`
+## Built With
+- Node.js
+- React
+- Redux
+- Typescript
+- Styled Components
+- CSS
+- ES6
+- jest
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 
 
-### `yarn build`
+## Getting Started
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To get a local copy up and running follow these steps.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+1. Clone or copy repository, and navigate to the the `development` branch
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. run `npm install` to install node packages
 
-### `yarn eject`
+3. run `npm start` to start the app in the `localhost:3000`, this will start the app in a new browser tab.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Testing
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Testing has been done using jest snapshots to test components, run using `npm test`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## AUTHOR
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**AYMAN JABR**
 
-## Learn More
+- Github: [![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AymanJabr/)
+- Linkedin: [![](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ayman-jabr/)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Show your support
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Give a ⭐️ if you like this project!
+
+## License :memo:
+
+# Released under Creative Commons License
+
+Copyright (c) 2021 Ayman Jabr.
+license can be found at: https://creativecommons.org/licenses/by-nc/4.0/
+
