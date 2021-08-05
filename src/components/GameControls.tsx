@@ -76,8 +76,8 @@ const GameControls = () => {
     return () => clearInterval(interval);
   }, [generationNumber ,gameStatus]);
 
-  const changeSpeed = (e: { target: {value: number} }) => {
-    dispatch(actionUpdateSpeed(e.target.value));
+  const changeSpeed = (value : string) => {
+    dispatch(actionUpdateSpeed(parseFloat(value)));
   };
 
   const startGame = () => {
@@ -260,7 +260,7 @@ const GameControls = () => {
           max="4"
           step="0.25"
           defaultValue={`${gameSpeed}`}
-          onInput={() => changeSpeed}
+          onInput={(e) => changeSpeed(e.currentTarget.value)}
         />
       </SpeedControlStyle>
 

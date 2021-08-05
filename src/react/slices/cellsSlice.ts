@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 
 // Define a type for the slice state
-interface CellsState {
+export interface CellsState {
   cells: Array<Array<number>>,
   originalCells: Array<Array<number>>
 }
