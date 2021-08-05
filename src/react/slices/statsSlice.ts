@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 
+/* eslint-disable  @typescript-eslint/explicit-module-boundary-types */
+
 // Define a type for the slice state
 export interface StatsState {
   speed: number;
@@ -21,6 +23,10 @@ const initialState: StatsState = {
   wrongFileFormat: false
 };
 
+
+type StatusType = "playing" | "stopped" | "paused";
+
+
 export const statsSlice = createSlice({
   name: "stats",
   initialState,
@@ -28,7 +34,7 @@ export const statsSlice = createSlice({
     actionUpdateSpeed: (state, action: PayloadAction<number>) => {
       state.speed = action.payload;
     },
-    actionUpdateStatus: (state, action: PayloadAction<any>) => {
+    actionUpdateStatus: (state, action: PayloadAction<StatusType>) => {
       state.status = action.payload;
     },
     actionUpdateGenerationNumber: (state, action: PayloadAction<number>) => {
