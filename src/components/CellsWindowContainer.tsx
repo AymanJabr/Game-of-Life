@@ -19,7 +19,7 @@ const CellsWindowContainer: React.FunctionComponent<CellsWindowsContainerProps> 
 
   const CellsWindowContainerStyle = styled.div`
     height: 100%;
-  `;
+`;
 
   const CellsWindowStyle = styled.div`
     position: absolute;
